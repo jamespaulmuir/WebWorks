@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<library>
+    <extension>
+        <entryClass>blackberry.ui.SpinnerExtension</entryClass>
+    </extension>
+    <features>
+        <feature id="blackberry.ui.Spinner" version="1.0.0" >Popup Spinner control</feature>
+    </features>
+</library>

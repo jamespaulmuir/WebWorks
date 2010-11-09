@@ -1,0 +1,110 @@
+The spinner control will allow you to have a more usable interface when interacting
+with <select> elements on a BlackBerry 5.0 browser.  It will also allow you to keep 
+the same consistent feel with your UI on a BlackBerry 6.0 browser.
+
+Examples on how to integrate this control into your UI to make an interface that is
+familiar with BlackBerry users can be found here:
+http://supportforums.blackberry.com/t5/Web-Development/Some-Cool-UI-Examples/td-p/519868 
+
+========================================================
+TESTED ON
+========================================================
+BlackBerry Bold 9700 v5.0.0.469
+BlackBerry Bold 9700 v5.0.0.545
+BlackBerry Curve 8900 v5.0.0.411
+BlackBerry Pearl 3G 9100 v5.0.0.604
+BlackBerry Storm 9550 v5.0.0.469
+BlackBerry Storm 9520 v5.0.0.428
+BlackBerry Storm 9520 v5.0.0.436
+BlackBerry Tour 9630 v5.0.0.419
+BlackBerry Torch 9800 v6.0.0.190
+BlackBerry Torch 9800 v6.0.0.246
+BlackBerry Style 9670 v6.0.0.309
+
+========================================================
+REQUIRED FEATURE ID
+========================================================
+<feature id="blackberry.ui.Spinner" version="1.0.0"/>
+
+========================================================
+SUMMARY
+========================================================
+static void open(options : OptionsInterface, callback : OnSpinnerClose)
+
+OnSpinnerClose( selectedIndex : Number )
+
+OptionsInterface:
+readwrite  property  String[]   items
+readwrite  property  Number     rowHeight
+readwrite  property  String     selectedIndex
+readwrite  property  String     title
+readwrite  property  Number     visibleRows
+
+========================================================
+CODE EXAMPLE
+========================================================
+
+function foo()
+{
+	var rowHeight;
+	var visibleRows;
+	
+	// Populate our items
+	var items = new Array('Barcelona', 'Beijing', 'Brasilia', 'Melbourne', 'Moscow', 'New York', 'Paris' );
+				
+	// Figure out our height and rows based on screen size
+	if (screen.height < 480){
+		rowHeight = 60;
+		visibleRows = 3;
+	}
+	else {
+		rowHeight = 75;
+		visibleRows = 4;
+	}
+	
+	// Configure the options 
+	var options = {'title': 'Choose A City:',
+				'rowHeight': rowHeight,
+				'visibleRows': visibleRows,
+				'selectedIndex': 2,
+				'items' : items};
+	 
+	// Open the spin dialog
+	blackberry.ui.Spinner.open(options, function (selectedIndex) {
+			alert(selectedIndex); }	  
+		);	
+}
+
+========================================================
+USAGE INFORMATION
+========================================================
+When creating a spinner control you will pass it an options object that you can
+create out of simple JSON.  This will provide the spinner with all the information it 
+needs to display properly.
+
+You will also pass in an event callback (OnSpinnerClose) that will be triggered once the user has 
+selected an item or cancelled the screen.  If the user does not select an item
+the selectedIndex returned as a parameter in the callback will be undefined.
+
+NOTE: The callback is handled asynchronously, so code that is placed directly after
+the "open" function call will be executed immediately while waiting for the user's 
+response input.
+
+========================================================
+PROPERTIES
+========================================================
+items:
+Is an array of string items you wish to display in the spinner control
+
+rowHeight:
+Is the height of each of the rows that you wish to display in the spinner
+
+selectedIndex:
+Is the index of the item you wish to be displayed as the default selected 
+item when the spinner is shown
+
+title:
+Is the title caption you wish to have at the top of the spinner
+
+visibleRows:
+Is the number of rows you wish to have visible in the spinner control
