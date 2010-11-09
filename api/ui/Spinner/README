@@ -6,6 +6,15 @@ You can also check out a screen shot of the control in the screenShot.png file f
 in this source directory.
 
 ========================================================
+BUILD INSTRUCTIONS
+========================================================
+To build and use the spinner control:
+1) Download the source code from github
+2) Build the extension by running the build.bat file
+3) Include the extension in the "ext" directory of your WebWorks application
+4) Add the <feature> element listed below to your application config.xml file
+
+========================================================
 TESTED ON
 ========================================================
 BlackBerry Bold 9700 v5.0.0.469
