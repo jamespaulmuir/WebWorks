@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<library>
+    <extension>
+        <entryClass>blackberry.ui.EventExtension</entryClass>
+    </extension>
+    <features>
+        <feature id="blackberry.ui.event" version="1.0.0" >Event object that allows for subscribing to an event for the start and end of the screen scrolling</feature>
+    </features>
+</library>

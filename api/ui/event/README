@@ -1,0 +1,49 @@
+The event object will allow you to subscribe to scrolling events on the screen.  This will
+allow you to trap scrolling events and react to new scroll positions
+
+========================================================
+BUILD INSTRUCTIONS
+========================================================
+To build and use the spinner control:
+1) Download the source code from github
+2) Build the extension by running the build.bat file
+3) Include the extension in the "ext" directory of your WebWorks application
+4) Add the <feature> element listed below to your application config.xml file
+
+========================================================
+TESTED ON
+========================================================
+BlackBerry Storm 9550 v5.0.0.469
+BlackBerry Torch 9800 v6.0.0.190
+BlackBerry Torch 9800 v6.0.0.246
+
+========================================================
+REQUIRED FEATURE ID
+========================================================
+<feature id="blackberry.ui.event" version="1.0.0"/>
+
+========================================================
+SUMMARY
+========================================================
+static void onScrollStart(callback : OnScrollStart)
+static void onScrollEnd(callback : OnScrollEnd)
+
+OnScrollStart()
+OnScrollEnd(verticalPosition, horizontalPosition)
+
+========================================================
+CODE EXAMPLE
+========================================================
+
+function foo()
+{
+	blackberry.ui.event.onScrollStart( function() {
+		alert('starting to scroll');
+		});
+		
+    blackberry.ui.event.onScrollEnd(function(vPos, hPos) {
+		alert('Vertical Position: ' + vPos + ' Horizontal Position: ' + hPos);
+		});
+}
+
+
