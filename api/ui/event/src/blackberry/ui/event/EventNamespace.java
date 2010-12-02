@@ -87,6 +87,7 @@ public class EventNamespace extends Scriptable {
 		}
 		
 		public void scrollChanged(Manager manager, int newHorizontalScroll, int newVerticalScroll) {
+			
 			_manager = manager;
 			if ( _reset == 0) {
 				_reset++;

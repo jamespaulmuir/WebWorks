@@ -54,7 +54,7 @@ public class FunctionOnScrollStart extends ScriptableFunction {
 					}
 				}
 				catch (Exception e) {
-					throw new RuntimeException(e.getMessage());
+					//throw new RuntimeException(e.getMessage());
 				}
 			}
 		}.start();

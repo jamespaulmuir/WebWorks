@@ -33,6 +33,7 @@ public class EventExtension implements WidgetExtension {
 
     private final static String[] _features = { EventNamespace.NAME };
 	private BrowserField _browserField = null;
+	private EventNamespace _eventNamespace = null;
 
     public String[] getFeatureList() {
         return _features;
@@ -40,7 +41,10 @@ public class EventExtension implements WidgetExtension {
 
     public void loadFeature(String feature, String version, Document doc, ScriptEngine scriptEngine) throws Exception {
         if (feature.equals(EventNamespace.NAME)) {
-            scriptEngine.addExtension(feature, new EventNamespace(_browserField));
+			if (_eventNamespace == null) {
+				_eventNamespace = new EventNamespace(_browserField);
+			}
+            scriptEngine.addExtension(feature, _eventNamespace );
         }
     }
 
@@ -50,5 +54,5 @@ public class EventExtension implements WidgetExtension {
 
     public void unloadFeatures(Document doc) {
     }
-
+	
 }
