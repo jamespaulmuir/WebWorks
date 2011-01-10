@@ -35,7 +35,7 @@ public class Logger {
     }
     
     public static void logMessage(LogType logType, Exception exception) {
-        printMessage(logType, _bundle.getString(exception.getMessage()), null);
+        printMessage(logType, exception.getMessage(), null);
     }
     
     public static void logMessage(LogType logType, String messageID, String info) {
