@@ -1,0 +1,49 @@
+<project name="WebWorks" default="jar" basedir=".">
+
+    <property name="build.sysclasspath" value="last"/>
+    <property file="build.properties"/>
+    
+    <target name="help">
+        <echo message="Common build targets:" />
+        <echo message="jar         - Builds bbwp.jar" />
+        <echo message="build       - Same as clean+jar" />
+        <echo message="compile     - Compiles BBWP classes" />
+        <echo message="clean       - Remove all *.class and ${jarName}" />
+    </target>
+    
+    <path id="classpath">
+        <pathelement path="." />
+        <pathelement location="." />
+    </path>
+    
+    <target name="build" depends="clean,jar"/>
+    
+    <target name="jar" depends="compile">
+        <mkdir dir="${distDir}"/>
+        <jar jarfile="${distDir}/${jarName}">
+            <fileset dir="classes"/>
+            <manifest>
+                <attribute name="Main-Class" value="net.rim.tumbler.WidgetPackager"/>
+            </manifest>
+        </jar>
+        <copy todir="${distDir}">
+            <fileset dir="${resDir}">
+                <include name="**/*.txt"/>
+                <include name="**/*.properties"/>
+            </fileset>
+        </copy>
+    </target>
+    
+    <target name="compile">
+        <mkdir dir="classes"/>
+        <javac
+            srcdir="src"
+            destdir="classes"
+            classpathref="classpath" debug="true"/>
+    </target>
+    
+    <target name="clean">
+        <delete dir="classes"/>
+    </target>
+    
+</project>
