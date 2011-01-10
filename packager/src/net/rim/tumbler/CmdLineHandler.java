@@ -27,7 +27,6 @@ import net.rim.tumbler.log.Logger;
 import net.rim.tumbler.session.SessionManager;
 
 public class CmdLineHandler {
-    private static final String         FILE_SEP = System.getProperty("file.separator");
     private static final String         OPTION_SOURCEDIR = "/s";
     private static final String         OPTION_PASSWORD = "/g";    
     private static final String         OPTION_OUTPUTDIR = "/o";
@@ -87,15 +86,15 @@ public class CmdLineHandler {
         String installPath = getAbsolutePath(SessionManager.BBWP_JAR_PATH);
         File p = new File(installPath);
         if (p.isDirectory()) {
-            if (installPath.lastIndexOf(FILE_SEP) == installPath.length() - 1) {
+            if (installPath.lastIndexOf(File.separator) == installPath.length() - 1) {
                 bbwpInstallFolder = installPath;
             } else {
-                bbwpInstallFolder = installPath + FILE_SEP;
+                bbwpInstallFolder = installPath + File.separator;
             }
         } else {
             installPath = installPath.substring(0, installPath
-                    .lastIndexOf(FILE_SEP))
-                    + FILE_SEP;
+                    .lastIndexOf(File.separator))
+                    + File.separator;
             bbwpInstallFolder = installPath;
         }
         
@@ -115,7 +114,7 @@ public class CmdLineHandler {
         
     private String parseWidgetName(String archivePath) {
         String name = archivePath.substring(
-                archivePath.lastIndexOf(FILE_SEP) + 1, archivePath.lastIndexOf("."));
+                archivePath.lastIndexOf(File.separator) + 1, archivePath.lastIndexOf("."));
         return name;
     }
       
@@ -187,13 +186,13 @@ public class CmdLineHandler {
                     + ".tmp";
         } else {
             if (_sourceDir.length() != 0) {
-                _sourceDir = _sourceDir + FILE_SEP + "src";
+                _sourceDir = _sourceDir + File.separator + "src";
             } else {
                 if (_outputDir.length() != 0) {
-                    _sourceDir = _outputDir + FILE_SEP + "src";
+                    _sourceDir = _outputDir + File.separator + "src";
                 } else {
                     _sourceDir = _widgetArchive.substring(0, _widgetArchive
-                            .lastIndexOf(FILE_SEP) + 1)
+                            .lastIndexOf(File.separator) + 1)
                             + "src";
                 }
             }
@@ -202,7 +201,7 @@ public class CmdLineHandler {
         // Populate correct output directory
         if (_outputDir.length() == 0) {
             _outputDir = _widgetArchive.substring(0, _widgetArchive
-                    .lastIndexOf(FILE_SEP) + 1)
+                    .lastIndexOf(File.separator) + 1)
                     + "bin";
         }
     }

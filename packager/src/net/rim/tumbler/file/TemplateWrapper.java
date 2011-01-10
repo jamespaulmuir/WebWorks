@@ -50,12 +50,12 @@ public class TemplateWrapper {
             // Populate destination path
             TemplateFile df = _templates.get(e.nextElement());
             String strOutputFile = toDirectory
-                    + System.getProperty("file.separator") + df.getName();
+                    + File.separator + df.getName();
             result.add(strOutputFile);
 
             // Create directory
             String strDirectory = strOutputFile.substring(0, strOutputFile
-                    .lastIndexOf(System.getProperty("file.separator")));
+                    .lastIndexOf(File.separator));
             File dir = new File(strDirectory);
             dir.mkdirs();
 

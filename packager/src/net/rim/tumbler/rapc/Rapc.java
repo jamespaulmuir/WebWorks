@@ -241,13 +241,12 @@ package net.rim.tumbler.rapc;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -266,7 +265,6 @@ public class Rapc {
         ".cod", ".jar", ".csl", ".cso", ".rapc", ".jar" 
     };
     
-    private final String FILE_SEP = System.getProperty("file.separator");
     private final String EOL = System.getProperty("line.separator");
     
     // RAPC Collections
@@ -441,7 +439,7 @@ public class Rapc {
     // / </summary>
     private String getJavaBin(String javaHome) {
     	if(javaHome != null && javaHome.trim() != "") {
-            return javaHome + "\\bin";
+            return javaHome + File.separator + "bin";
     	}
     	
     	return "";
@@ -537,7 +535,7 @@ public class Rapc {
     
     // Generate our .rapc file
     private String generateRapcFile() throws IOException {
-        String fileName = _cwd + FILE_SEP + SessionManager.getInstance().getArchiveName() + ".rapc";
+        String fileName = _cwd + File.separator + SessionManager.getInstance().getArchiveName() + ".rapc";
         //BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
         //This ensures that the generated RAPC file is UTF8 encoded
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName),"UTF8"));
@@ -622,8 +620,8 @@ public class Rapc {
         String tempPrefix = "____HOVER_ICON_";
         
         // Copy the file with new prefix
-        File from = new File(directory + FILE_SEP + icon);              
-        File to = new File(from.getParent() + FILE_SEP + tempPrefix + from.getName());          
+        File from = new File(directory + File.separator + icon);              
+        File to = new File(from.getParent() + File.separator + tempPrefix + from.getName());          
         if ((!to.exists()) && from.exists()) {
             try {
                 FileManager.copyFile(from, to);

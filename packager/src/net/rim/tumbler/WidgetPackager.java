@@ -19,8 +19,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import net.rim.tumbler.config.WidgetConfig;
 import net.rim.tumbler.exception.CommandLineException;
@@ -178,7 +176,7 @@ public class WidgetPackager {
 		Process signingProcess;
 		long lastModified = 0;
 		String codFullname = sessionManager.getSourceFolder()
-				+ System.getProperty("file.separator")
+				+ File.separator
 				+ sessionManager.getArchiveName() + ".cod";
 
 		try {
@@ -188,7 +186,7 @@ public class WidgetPackager {
 			String cmdline = "java -jar SignatureTool.jar -a -c "
 					+ (password.length() == 0 ? "" : "-p " + password + " ")
 					+ "\"" + sessionManager.getSourceFolder()
-					+ System.getProperty("file.separator")
+					+ File.separator
 					+ sessionManager.getArchiveName() + ".cod" + "\"";
 			signingProcess = Runtime.getRuntime().exec(cmdline, null, cwd);
 		} catch (IOException ex) {
@@ -217,7 +215,7 @@ public class WidgetPackager {
 			throws IOException {
 		String EOL = System.getProperty("line.separator");
 		String fileName = SessionManager.getInstance().getSourceFolder()
-				+ System.getProperty("file.separator")
+				+ File.separator
 				+ SessionManager.getInstance().getArchiveName() + ".alx";
 		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
 		writer.write("<loader version=\"1.0\" >" + EOL);

@@ -55,7 +55,6 @@ public class FileManager {
     private Vector<String>           _extensionClasses;
     
     private static final String         EOL = System.getProperty("line.separator");
-    private static final String         FILE_SEP = System.getProperty("file.separator");
     private static final String         STANDARD_OUTPUT = "StandardInstall";
     private static final String         OTA_OUTPUT = "OTAInstall";
     private static final String         EXTENSION_DIRECTORY = "extension";
@@ -73,10 +72,10 @@ public class FileManager {
     public void cleanOutput() {
         String outputDir = SessionManager.getInstance().getOutputFolder();
         String archiveName = SessionManager.getInstance().getArchiveName();
-        deleteDirectory(new File(outputDir + FILE_SEP + FileManager.OTA_OUTPUT));
-        deleteDirectory(new File(outputDir + FILE_SEP + FileManager.STANDARD_OUTPUT));
-        (new File(outputDir + FILE_SEP + archiveName + ".jar")).delete();
-        (new File(outputDir + FILE_SEP + archiveName + ".rapc")).delete();
+        deleteDirectory(new File(outputDir + File.separator + FileManager.OTA_OUTPUT));
+        deleteDirectory(new File(outputDir + File.separator + FileManager.STANDARD_OUTPUT));
+        (new File(outputDir + File.separator + archiveName + ".jar")).delete();
+        (new File(outputDir + File.separator + archiveName + ".rapc")).delete();
     }
     
     public void cleanSource() {
@@ -110,7 +109,7 @@ public class FileManager {
 			String zipEntryName = ze.getName();
             File zipEntryFile = new File(ze.getName());
             boolean isRoot = zipEntryFile.getParent() == null;
-            String fname = sourceFolder + FILE_SEP + zipEntryFile.getPath();
+            String fname = sourceFolder + File.separator + zipEntryFile.getPath();
             
             // Extract file
 			InputStream is = zip.getInputStream(ze);
@@ -155,7 +154,7 @@ public class FileManager {
         BufferedWriter writer;
 
         // jdw file
-        fileName = sourceDir + FILE_SEP + codName + ".jdw";
+        fileName = sourceDir + File.separator + codName + ".jdw";
         writer = new BufferedWriter(new FileWriter(fileName));
 
         writer.write("## RIM Java Development Environment" + EOL);
@@ -188,7 +187,7 @@ public class FileManager {
         writer.close();
 
         // jdp file
-        fileName = sourceDir + FILE_SEP + codName + ".jdp";
+        fileName = sourceDir + File.separator + codName + ".jdp";
         writer = new BufferedWriter(new FileWriter(fileName));
 
         writer.write("## RIM Java Development Environment" + EOL);
@@ -289,7 +288,7 @@ public class FileManager {
         	return;
         }
         
-        fileName = sourceDir + FILE_SEP + "runOnStartup.jdp";
+        fileName = sourceDir + File.separator + "runOnStartup.jdp";
         writer = new BufferedWriter(new FileWriter(fileName));
 
         writer.write("## RIM Java Development Environment" + EOL);
@@ -365,7 +364,7 @@ public class FileManager {
     
     public void writeToSource(byte[] fileToWrite, String relativeFile) throws Exception {
         try {
-            String s = SessionManager.getInstance().getSourceFolder() + FILE_SEP + relativeFile;
+            String s = SessionManager.getInstance().getSourceFolder() + File.separator + relativeFile;
             if (!new File(s).exists()) {
                 new File(s).getParentFile().mkdirs();
             }       
@@ -390,18 +389,18 @@ public class FileManager {
         // Standard output
         File from, to;
         for (String ext : WidgetPackager.STANDARD_OUTPUTS) {
-            from = new File(sourceFolder + FILE_SEP + archiveName + ext);
-            to = new File(outputFolder + FILE_SEP + FileManager.STANDARD_OUTPUT + FILE_SEP + archiveName + ext);
+            from = new File(sourceFolder + File.separator + archiveName + ext);
+            to = new File(outputFolder + File.separator + FileManager.STANDARD_OUTPUT + File.separator + archiveName + ext);
             copyFile(from, to);
         }
         
         // OTA output
         for (String ext : WidgetPackager.OTA_OUTPUTS) {
-            from = new File(sourceFolder + FILE_SEP + archiveName + ext);
-            to = new File(outputFolder + FILE_SEP + FileManager.OTA_OUTPUT + FILE_SEP + archiveName + ext);
+            from = new File(sourceFolder + File.separator + archiveName + ext);
+            to = new File(outputFolder + File.separator + FileManager.OTA_OUTPUT + File.separator + archiveName + ext);
             copyFile(from, to); 
         }
-        from = new File(sourceFolder + FILE_SEP +  archiveName + ".cod");
+        from = new File(sourceFolder + File.separator +  archiveName + ".cod");
         expandCod(from);
     }
     
@@ -442,9 +441,9 @@ public class FileManager {
             
             File f = new File(
                     SessionManager.getInstance().getOutputFolder() 
-                    + FILE_SEP 
+                    + File.separator 
                     + "OTAInstall" 
-                    + FILE_SEP + entry.getName());
+                    + File.separator + entry.getName());
             
             f.getParentFile().mkdirs();
             f.createNewFile();
@@ -514,7 +513,7 @@ public class FileManager {
     
 	private void populateExtension(String extensionArchive) throws Exception {
 		// Create the extension directory
-		String extensionPath = SessionManager.getInstance().getSourceFolder() + FILE_SEP + EXTENSION_DIRECTORY  + FILE_SEP;
+		String extensionPath = SessionManager.getInstance().getSourceFolder() + File.separator + EXTENSION_DIRECTORY  + File.separator;
 		(new File(extensionPath)).mkdirs();
 		
 		// Extract all resource files in archive

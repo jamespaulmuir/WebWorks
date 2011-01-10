@@ -178,7 +178,7 @@ public class BBWPProperties {
                                 if (new File(_rapc).isAbsolute()) {
                                     _rapc = getAbsolutePath(_rapc);
                                 } else {                                
-                                    _rapc = _sessionHome + "\\" + _rapc;
+                                    _rapc = _sessionHome + File.separator + _rapc;
                                 }
                             }
                         }
@@ -190,7 +190,7 @@ public class BBWPProperties {
                             _javaHome = childlist.item(j).getNodeValue();
 
                             if (!_javaHome.isEmpty()) {
-                                _javac = "\"" + _javaHome + "\\bin\\javac.exe"
+                                _javac = "\"" + _javaHome + File.separator + "bin" + File.separator + "javac.exe"
                                         + "\"";
                             } else {
                                 _javac = getAbsolutePath("javac.exe");
@@ -206,7 +206,7 @@ public class BBWPProperties {
                             if (new File(_templateDir).isAbsolute()) {
                                 _templateDir = getAbsolutePath(_templateDir);
                             } else {
-                                _templateDir = _sessionHome + "\\" + _templateDir;
+                                _templateDir = _sessionHome + File.separator + _templateDir;
                             }
                         }
                     }
@@ -246,7 +246,7 @@ public class BBWPProperties {
             if (new File(lib).isAbsolute()) {
                 lib = getAbsolutePath(lib);
             } else {
-                lib = _sessionHome + "\\" + lib;
+                lib = _sessionHome + File.separator + lib;
             }
             
             if (new File(lib).exists()) {
