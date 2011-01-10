@@ -15,22 +15,20 @@
 */
 package net.rim.tumbler.session;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-
-import com.sun.org.apache.xerces.internal.parsers.DOMParser;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import net.rim.tumbler.exception.PackageException;
 import net.rim.tumbler.exception.ValidationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class BBWPProperties {
     private static final String NODE_WCP = "wcp";
@@ -121,34 +119,13 @@ public class BBWPProperties {
     }
     
     private void parsePropertiesFile() throws Exception {
-        FileInputStream fisProperties = null;
-        Document docProperties = null;
-
-        fisProperties = new FileInputStream(_bbwpProperties);
-        byte[] data = new byte[(int) (new File(_bbwpProperties)).length()];
-        fisProperties.read(data);
-        docProperties = createPropertiesDocument(data);
-        getProperties(docProperties);
-
-        return;
+        getProperties(createPropertiesDocument(new File(_bbwpProperties)));
     }
     
-    private Document createPropertiesDocument(byte[] input) throws Exception {
-        ByteArrayInputStream ba = new ByteArrayInputStream(input);
-        DOMParser dp = new DOMParser();
-
-        dp.setFeature("http://xml.org/sax/features/validation", false);
-        dp.setFeature(
-                "http://xml.org/sax/features/external-parameter-entities",
-                false);
-        dp.setFeature("http://xml.org/sax/features/namespaces", false);
-        dp
-                .setFeature(
-                        "http://apache.org/xml/features/nonvalidating/load-external-dtd",
-                        false);
-
-        dp.parse(new InputSource(ba));
-        return dp.getDocument();
+    private Document createPropertiesDocument(File input) throws Exception {
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        return dBuilder.parse(input);
     }
 
     private void getProperties(Document dom) throws Exception {
