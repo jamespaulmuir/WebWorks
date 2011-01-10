@@ -161,12 +161,10 @@ public class SessionManager {
         } catch (Exception e) {
             home = "";
         }
-
         if (home.equals("")) {
             return System.getProperty("user.dir");
-        } else {
-            return home
-                    .substring(0, home.lastIndexOf("\\bin"));
+        } else { 
+            return new File(home).getParent();
         }
     }
     
